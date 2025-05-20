@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/AuthLayout"
+    android:layout_margin="16dp">
+    <TextView
+        android:id="@+id/tvLoginHeader"
+        android:theme="@style/Base.Theme.NifferAndroid.HeaderTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_niffler"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/AuthLayout"
+        />
+
+    <ImageView
+        android:id="@+id/nifflerAvatar"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:src="@drawable/niffler"
+        android:contentDescription="@string/niffler"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="12dp"
+        style="@style/Widget.AppTheme.Niffler.PrimaryButton"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

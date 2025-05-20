@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <group>
+        <item
+            android:id="@+id/profile_item"
+            android:icon="@drawable/ic_user"
+            android:title="@string/profile"
+            android:checkable="true"
+            app:showAsAction="ifRoom"
+            />
+    </group>
+    <group>
+        <item
+            android:id="@+id/friends_item"
+            android:icon="@drawable/ic_friends"
+            android:title="@string/friends"
+            android:checkable="true"
+            app:showAsAction="ifRoom"
+            />
+        <item
+            android:id="@+id/all_people_item"
+            android:icon="@drawable/ic_all"
+            android:title="@string/all_people"
+            android:checkable="true"
+            app:showAsAction="ifRoom"
+            />
+    </group>
+    <item
+        android:id="@+id/sign_out_item"
+        android:icon="@drawable/ic_signout"
+        android:title="@string/sign_out"
+        android:checkable="true"
+        app:showAsAction="ifRoom"
+        />
+</menu>

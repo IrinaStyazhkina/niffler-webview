@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="ru.niffer_android.ui.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account"
+        >
+        <action
+            android:id="@+id/action_accountFragment_to_editProfileFragment"
+            app:destination="@+id/editProfileFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="ru.niffer_android.ui.account.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile"
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/addNewSpendingFragment"
+        android:name="ru.niffer_android.ui.newSpending.EditSpendingFragment"
+        android:label="fragment_add_new_spending"
+        tools:layout="@layout/fragment_edit_spending">
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.niffer_android.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main"
+        >
+        <action
+            android:id="@+id/action_mainFragment_to_editSpendingFragment"
+            app:destination="@+id/addNewSpendingFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="ru.niffer_android.ui.friends.FriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends"
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/allPeopleFragment"
+        android:name="ru.niffer_android.ui.allPeople.AllPeopleFragment"
+        android:label="fragment_all_people"
+        tools:layout="@layout/fragment_all_people"
+        >
+    </fragment>
+
+    <!-- Global Actions -->
+    <action
+        android:id="@+id/action_global_addNewSpendingFragment"
+        app:destination="@id/addNewSpendingFragment" />
+    <action
+        android:id="@+id/action_global_toAccountFragment"
+        app:destination="@id/accountFragment" />
+    <action
+        android:id="@+id/action_global_toFriendsFragment"
+        app:destination="@id/friendsFragment" />
+    <action
+        android:id="@+id/action_global_toAllPeople"
+        app:destination="@id/allPeopleFragment" />
+    <action
+        android:id="@+id/action_global_toMainPage"
+        app:destination="@id/mainFragment" />
+    <action
+        android:id="@+id/action_global_toSignInPage"
+        app:destination="@+id/signInActivity"/>
+
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="ru.niffer_android.ui.auth.StartActivity"
+        android:label="SignInActivity"
+        tools:layout="@layout/activity_start"/>
+</navigation>

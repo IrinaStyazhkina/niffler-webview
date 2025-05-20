@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_page"
+        android:icon="@drawable/ic_search"
+        android:title="@string/main_page" />
+    <item
+        android:id="@+id/profile_item"
+        android:icon="@drawable/ic_user"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/friends_item"
+        android:icon="@drawable/ic_friends"
+        android:title="@string/friends" />
+    <item
+        android:id="@+id/all_people_item"
+        android:icon="@drawable/ic_all"
+        android:title="@string/all_people" />
+</menu> 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/tvProfileHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textSize="36sp"
+        android:theme="@style/Base.Theme.NifferAndroid.HeaderTextAppearance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profile" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profileDataContainer"
+        style="?attr/materialCardViewElevatedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="?colorSurface"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileHeader"
+        app:shapeAppearance="?attr/shapeAppearanceCornerLarge"
+        app:cardElevation="4dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profileDataContainerConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profileEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="@string/edit_underlined"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/profileDataContainerConstraint"
+                app:layout_constraintTop_toTopOf="@+id/cvProfileImage"
+                android:textColor="@color/gray_1000"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProfileImage"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_margin="24dp"
+                app:layout_constraintStart_toStartOf="@+id/profileDataContainerConstraint"
+                app:layout_constraintTop_toTopOf="@+id/profileDataContainerConstraint"
+                app:cardCornerRadius="70dp">
+
+                <ImageView
+                    android:id="@+id/ivProfileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@color/gray_300"
+                    android:backgroundTint="@color/gray_300"
+                    android:contentDescription="@string/profile_picture"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                app:layout_constraintStart_toStartOf="@+id/cvProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/cvProfileImage"
+                android:layout_marginTop="12dp"
+                tools:text="\@dtuchs"
+                android:theme="@style/Base.Theme.NifferAndroid.HeaderTextAppearance"
+                />
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cvProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+                tools:text="Dmitrii Tuchs"
+                android:textColor="@color/gray_600"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

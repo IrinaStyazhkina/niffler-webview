@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.AppTheme.Niffler.PrimaryButton" parent="Widget.Material3.Button">
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/light_primary</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+    </style>
+    <style name="Widget.AppTheme.Niffler.SecondaryButton" parent="Widget.AppTheme.Niffler.PrimaryButton">
+        <item name="iconTint">@color/light_primary</item>
+        <item name="android:textColor">@color/gray_1000</item>
+        <item name="iconSize">30dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@color/gray_100</item>
+        <item name="strokeColor">@color/gray_300</item>
+    </style>
+    <style name="Widget.AppTheme.Niffler.AccentButton" parent="Widget.AppTheme.Niffler.PrimaryButton">
+        <item name="backgroundTint">@color/green</item>
+    </style>
+    <style name="Widget.AppTheme.Niffler.PrimaryIconButton" parent="Widget.AppTheme.Niffler.PrimaryButton">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+    <style name="Widget.AppTheme.Niffler.SecondaryIconButton" parent="Widget.AppTheme.Niffler.SecondaryButton">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+    <style name="Widget.AppTheme.Niffler.SurfaceIconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">@color/gray_600</item>
+    </style>
+</resources>
