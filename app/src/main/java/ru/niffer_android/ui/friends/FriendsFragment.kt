@@ -6,6 +6,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +22,7 @@ import ru.niffer_android.adapter.people.OnInteractionListener
 import ru.niffer_android.adapter.people.PeopleAdapter
 import ru.niffer_android.databinding.FragmentFriendsBinding
 import ru.niffer_android.model.Result
-import ru.niffer_android.ui.allPeople.PeopleViewModel
+import ru.niffer_android.network.WebAppInterface
 import ru.niffer_android.ui.bottomSheet.SubmitBottomSheet
 import ru.niffer_android.ui.bottomSheet.SubmitButtonStyle
 import ru.niffer_android.utils.hideLoader
@@ -31,9 +33,6 @@ import ru.niffer_android.utils.showLoader
 class FriendsFragment: Fragment() {
 
     private lateinit var binding: FragmentFriendsBinding
-    private val allPeopleViewModel: PeopleViewModel by activityViewModels()
-    private var searchJob: Job? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,110 +44,29 @@ class FriendsFragment: Fragment() {
             false,
         )
 
-        allPeopleViewModel.loadFriends(query = null)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupWebView()
+    }
 
-        val friendsAdapter = PeopleAdapter(object : OnInteractionListener {
-            override fun onInviteSendButtonClick(username: String) {
-                val modalBottomSheet = SubmitBottomSheet(
-                    titleText = getString(R.string.send_invitation),
-                    subtitleText = getString(R.string.send_invitation_to, username),
-                )
-                    .setSubmitButtonText(getString(R.string.send_invitation))
-                    .setOnSaveClickListener {
-                        allPeopleViewModel.sendInvitation(username)
-                    }
-                modalBottomSheet.show(parentFragmentManager, SubmitBottomSheet.TAG)
-            }
-
-            override fun onAcceptFriendshipButtonClick(username: String) {
-                val modalBottomSheet = SubmitBottomSheet(
-                    titleText = getString(R.string.accept_invitation),
-                    subtitleText = getString(R.string.accept_invitation_from, username),
-                )
-                    .setSubmitButtonText(getString(R.string.accept_invitation))
-                    .setOnSaveClickListener {
-                        allPeopleViewModel.acceptInvitation(username)
-                    }
-                modalBottomSheet.show(parentFragmentManager, SubmitBottomSheet.TAG)
-            }
-
-            override fun onDeclineFriendshipButtonClick(username: String) {
-                val modalBottomSheet = SubmitBottomSheet(
-                    titleText = getString(R.string.decline_invitation),
-                    subtitleText = getString(R.string.decline_invitation_from, username),
-                )
-                    .setSubmitButtonText(getString(R.string.decline_invitation))
-                    .setOnSaveClickListener {
-                        allPeopleViewModel.declineInvitation(username)
-                    }
-                    .setSubmitButtonStyle(SubmitButtonStyle.WARNING)
-                modalBottomSheet.show(parentFragmentManager, SubmitBottomSheet.TAG)
-            }
-
-            override fun onUnfriendButtonClick(username: String) {
-                val modalBottomSheet = SubmitBottomSheet(
-                    titleText = getString(R.string.unfriend),
-                    subtitleText = getString(R.string.unfriend_with, username),
-                )
-                    .setSubmitButtonText(getString(R.string.unfriend))
-                    .setOnSaveClickListener {
-                        allPeopleViewModel.deleteFriend(username)
-                    }
-                    .setSubmitButtonStyle(SubmitButtonStyle.WARNING)
-                modalBottomSheet.show(parentFragmentManager, SubmitBottomSheet.TAG)
-            }
-        })
-
-        binding.friendsList.adapter = friendsAdapter
-
-        binding.searchBar.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                searchJob?.cancel()
-                searchJob = lifecycleScope.launch {
-                    delay(300)
-                    val query = s?.toString().orEmpty()
-                    allPeopleViewModel.updateFriendsSearchQuery(query)
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        lifecycleScope.launch {
-            allPeopleViewModel.friends.collect { peopleData ->
-                when (peopleData) {
-                    is Result.Loading -> showLoader()
-                    is Result.Success -> {
-                        hideLoader()
-                        friendsAdapter.submitList(peopleData.data.content)
-                    }
-                    is Result.Error -> {
-                        hideLoader()
-                        showError("Friends data is not loaded")
-                    }
-                }
-            }
+    private fun setupWebView() {
+        binding.friendsWebView.apply {
+            settings.javaScriptEnabled = true
+            addJavascriptInterface(WebAppInterface(), "AndroidInterface")
+            settings.domStorageEnabled = true
+            settings.allowFileAccess = false
+            settings.allowContentAccess = false
+            settings.cacheMode = WebSettings.LOAD_DEFAULT
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+            settings.setSupportMultipleWindows(false)
+            settings.useWideViewPort = true
+            settings.userAgentString += " NifflerAndroid"
+            webViewClient = object : WebViewClient() {}
+            loadUrl("https://niffler-stage.qa.guru/people/friends")
         }
-
-        binding.friendsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val totalItemCount = layoutManager.itemCount
-                val lastVisible = layoutManager.findLastVisibleItemPosition()
-
-                if (lastVisible + 3 >= totalItemCount) {
-                    allPeopleViewModel.loadNextFriendsPage()
-                }
-            }
-        })
     }
 
 }

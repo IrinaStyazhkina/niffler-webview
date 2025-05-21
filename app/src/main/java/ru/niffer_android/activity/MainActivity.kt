@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val signInViewModel: SignInViewModel by viewModels()
-    private val editSpendingViewModel: EditSpendingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarLayout.toolbar)
 
         binding.toolbarLayout.addSpendingButton.setOnClickListener {
-            editSpendingViewModel.setEditSpending(spending = null)
             findNavController(R.id.nav_host_fragment)
                 .navigate(R.id.action_global_addNewSpendingFragment)
         }

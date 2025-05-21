@@ -5,66 +5,15 @@
     android:id="@+id/allPeopleLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp">
+    >
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone"
+    <WebView
+        android:id="@+id/peopleWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvAllPeopleHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/all_people"
-        android:textSize="36sp"
-        android:theme="@style/Base.Theme.NifferAndroid.HeaderTextAppearance"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/allPeopleLayout" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:endIconDrawable="@drawable/ic_search"
-        app:endIconMode="custom"
-        app:endIconTint="@color/light_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAllPeopleHeader">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_50"
-            android:backgroundTintMode="add"
-            android:hint="@string/search"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingBottom="16dp"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/allPeopleList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/people_item"
-            />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
