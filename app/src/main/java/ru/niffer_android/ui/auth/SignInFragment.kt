@@ -48,7 +48,7 @@ class SignInFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         signInViewModel.apply {
-            restoreState(requireActivity().application)
+            restoreState()
         }
 
         binding.buttonLogin.setOnClickListener {

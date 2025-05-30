@@ -1,33 +1,16 @@
 package ru.niffer_android.ui.friends
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import ru.niffer_android.R
-import ru.niffer_android.adapter.people.OnInteractionListener
-import ru.niffer_android.adapter.people.PeopleAdapter
 import ru.niffer_android.databinding.FragmentFriendsBinding
-import ru.niffer_android.model.Result
 import ru.niffer_android.network.WebAppInterface
-import ru.niffer_android.ui.bottomSheet.SubmitBottomSheet
-import ru.niffer_android.ui.bottomSheet.SubmitButtonStyle
-import ru.niffer_android.utils.hideLoader
-import ru.niffer_android.utils.showError
-import ru.niffer_android.utils.showLoader
+
 
 @AndroidEntryPoint
 class FriendsFragment: Fragment() {

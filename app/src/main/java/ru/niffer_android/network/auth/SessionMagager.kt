@@ -46,7 +46,7 @@ object SessionManager {
             requireNotNull(errorIntent)
         )
 
-        clearSession(context)
+        clearSession(context.applicationContext)
         postLogoutCallback?.invoke()
     }
 
@@ -59,7 +59,7 @@ object SessionManager {
             return
         }
 
-        clearSession(context)
+        clearSession(context.applicationContext)
 
         val intent = Intent(context, StartActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -69,9 +69,11 @@ object SessionManager {
     }
 
     private fun clearSession(context: Context) {
-        context.getSharedPreferences(AuthConfig.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+        Log.d("CLEAR S", context.applicationContext.toString())
+
+        context.applicationContext.getSharedPreferences(AuthConfig.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
             .edit {
-                putString(AuthConfig.AUTH_STATE, null)
+                clear()
             }
         TokenStorage.clearTokenStorage()
     }

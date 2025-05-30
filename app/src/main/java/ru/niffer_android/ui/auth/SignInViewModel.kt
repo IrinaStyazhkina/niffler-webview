@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 import net.openid.appauth.AuthState
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
-
 import org.json.JSONException
 import ru.niffer_android.model.AuthLoadingState
 import ru.niffer_android.network.auth.AppAuth
@@ -78,7 +77,7 @@ class SignInViewModel @Inject constructor(
                             )
                         )
                     }
-                    persistState(context)
+                    persistState()
                 }
                 .onFailure {
                     authState.postValue(AuthState())
@@ -92,14 +91,17 @@ class SignInViewModel @Inject constructor(
         return authorizationServiceManager.service.getAuthorizationRequestIntent(request)
     }
 
-    private fun persistState(context: Context) {
-        context.getSharedPreferences(AuthConfig.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private fun persistState() {
+        application.getSharedPreferences(AuthConfig.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
             .edit {
                 putString(AuthConfig.AUTH_STATE, authState.value?.jsonSerializeString())
             }
     }
 
-    fun restoreState(application: Application) {
+    fun restoreState() {
+        //2025-05-27 10:09:47.262  ru.niffer_android.application.NifflerApp@e6d8e4f
+
+        Log.d("APP DATA", application.applicationContext.toString())
         val jsonString = application
             .getSharedPreferences(AuthConfig.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
             .getString(AuthConfig.AUTH_STATE, null)
@@ -131,7 +133,7 @@ class SignInViewModel @Inject constructor(
                             )
                             authState.postValue(AuthState())
                             TokenStorage.clearTokenStorage()
-                            persistState(application)
+                            persistState()
                         }
                     }
                 }
